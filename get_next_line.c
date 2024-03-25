@@ -6,7 +6,7 @@
 /*   By: bmilford <bmilford@student.42adel.o>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:34:45 by bmilford          #+#    #+#             */
-/*   Updated: 2024/03/22 15:08:03 by bmilford         ###   ########.fr       */
+/*   Updated: 2024/03/26 00:06:46 by beefie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -14,7 +14,7 @@
 char	*get_next_line(int fd)
 {
 	int			index
-	static char	*buf
+	static char	*stash
 	char		*buffy
 	int			size;
 	char		*newline;
@@ -31,4 +31,25 @@ char	*get_next_line(int fd)
 			index++;
 		}
 	}
+}
+
+void	read_nstash()
+{
+	// add content of buffer to the end of the stash
+}
+
+void	add_tostash()
+{
+	//extracts all characters from the stash and stores them in 'line'
+	//stops when encouters the '\n'
+}
+
+void	extract_line()
+{
+	//clears stash so only not returned characters are left
+}
+
+void	clean_stash()
+{
+	//self explanitory, free()
 }

@@ -6,7 +6,7 @@
 /*   By: bmilford <bmilford@student.42adel.o>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:08:25 by bmilford          #+#    #+#             */
-/*   Updated: 2024/03/22 15:50:36 by bmilford         ###   ########.fr       */
+/*   Updated: 2024/03/25 23:53:08 by beefie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -32,5 +32,23 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (*s2 != '\0')
 		join[index1++] = *s2++;
 	join[index1] = '\0';
+	free(join);
 	return (join);
 }
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	index;
+
+	index = 0;
+	while(s[index] != '\0')
+	{
+		if (s[index] == c)
+			return (s + index);
+		index++;
+	}
+	if (c == '\0' & s[index] == '\0')
+		return (s + index);
+	return (NULL);
+}
+
