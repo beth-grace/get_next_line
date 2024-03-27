@@ -6,7 +6,7 @@
 /*   By: bmilford <bmilford@student.42adel.o>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:34:45 by bmilford          #+#    #+#             */
-/*   Updated: 2024/03/26 00:06:46 by beefie           ###   ########.fr       */
+/*   Updated: 2024/03/27 18:12:49 by bmilford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 	{
 		buffy = malloc(BUFFER_SIZE + 1) * (sizeof(int));
 		size = read (fd, buffy, BUFFER_SIZE);
-		o nahwhile (buf[index] != '\0')
+		while (buf[index] != '\0')
 		{
 			if (index == len)
 				buf = malloc(BUFFER_SIZE + index) * (sizeof(int));
@@ -33,15 +33,30 @@ char	*get_next_line(int fd)
 	}
 }
 
-void	read_nstash()
+// add content of buffer to the end of the stash
+void	read_nstash(char *stash, char *buffy)
 {
-	// add content of buffer to the end of the stash
+	size_t	index;
+	size_t	add;
+
+	index = 0;
+	add = 0;
+	size = read(fd, buffy, BUFFER_SIZE);
+	while (stash)
+		index++;
+	while (buffy)
+	{
+		stash[index] = buffy[add];
+		index++;
+		add;
+	}
 }
 
+	//extracts all characters from the stash and stores them in 'line'
+	//stops when it reads a '\n'
 void	add_tostash()
 {
-	//extracts all characters from the stash and stores them in 'line'
-	//stops when encouters the '\n'
+
 }
 
 void	extract_line()
