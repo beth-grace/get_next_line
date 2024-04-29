@@ -6,7 +6,7 @@
 /*   By: bmilford <bmilford@student.42adel.o>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:34:45 by bmilford          #+#    #+#             */
-/*   Updated: 2024/03/27 18:12:49 by bmilford         ###   ########.fr       */
+/*   Updated: 2024/04/30 01:38:14 by beefie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -20,51 +20,57 @@ char	*get_next_line(int fd)
 	char		*newline;
 
 	index = 0;
-	while
-	{
-		buffy = malloc(BUFFER_SIZE + 1) * (sizeof(int));
-		size = read (fd, buffy, BUFFER_SIZE);
-		while (buf[index] != '\0')
-		{
-			if (index == len)
-				buf = malloc(BUFFER_SIZE + index) * (sizeof(int));
-			index++;
-		}
-	}
+	if (BUFFER_SIZE <= 0)
+		return (0);
+	buffy = (char *)malloc(BUFFER_SIZE + 1) * (sizeof(char));
+	if (!buffy)
+		return (0);
+	newline = read_nstash(fd, buffy, stash);
+	stash = extract_line(newline);
+	free (buffy)
+	buffy = NULL;
+	return (newline);
 }
+
 
 // add content of buffer to the end of the stash
-void	read_nstash(char *stash, char *buffy)
+static char	read_nstash(int fd, char *buffy, char *stash)
 {
 	size_t	index;
-	size_t	add;
+	char	hold_temp;
 
 	index = 0;
-	add = 0;
-	size = read(fd, buffy, BUFFER_SIZE);
-	while (stash)
-		index++;
-	while (buffy)
+	while (index != '\0')
 	{
-		stash[index] = buffy[add];
-		index++;
-		add;
+		index = read(fd, buffy, BUFFER_SIZE);
+		if (index == 0) 
+			return (0);
+		buffy[index] = '\0';
+		if(!stash)
+			stash = ft_strdup("")/*??*/;
+		hold_temp = stash;
+		stash = ft_strjoin(hold_temp, buffy);
+		free(hold_temp);
+		hold_temp = NULL;
+		if (ft_strchr(buffy, '\n'))
+			break ;
 	}
+	return (stash);
 }
 
-	//extracts all characters from the stash and stores them in 'line'
-	//stops when it reads a '\n'
-void	add_tostash()
+static char	*extract_line(char *newline)
 {
+	size_t	index;
+	char	*stash;
+
+	index = 0;
+	while (newline[index] != '\n' && newline[index] != '\0')
+		index++;
+	stash = ft_substr(newline, index + 1, ft_strlen(newline) - index);
+	if (!stash)
+		return (0);
+	line[index + 1] = '\0';
+	return (stash);
 
 }
 
-void	extract_line()
-{
-	//clears stash so only not returned characters are left
-}
-
-void	clean_stash()
-{
-	//self explanitory, free()
-}
