@@ -6,7 +6,7 @@
 /*   By: bmilford <bmilford@student.42adel.o>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:34:45 by bmilford          #+#    #+#             */
-/*   Updated: 2024/04/30 18:15:15 by bmilford         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:15:31 by bmilford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -14,20 +14,20 @@
 char	*get_next_line(int fd)
 {
 	int			index;
-	static char	*stash;
+	static char	*stash[256];
 	char		*buffy;
 	char		*newline;
 
 	index = 0;
-	if (BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (0);
 	buffy = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffy)
 		return (0);
-	if (!stash)
-		stash = ft_strdup("");
-	newline = read_nstash(fd, buffy, stash);
-	stash = extract_line(newline);
+	if (!stash[fd])
+		stash[fd] = ft_strdup("");
+	newline = read_nstash(fd, buffy, stash[fd]);
+	stash[fd] = extract_line(newline);
 	if (newline && ft_strlen(newline) < 1)
 	{
 		free (newline);
